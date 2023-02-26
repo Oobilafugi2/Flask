@@ -1,0 +1,5 @@
+# need to specify versions to work together
+
+werkzeug==2.1.2
+flask == 2.1.2   
+flask-restx >= 0.5.1
