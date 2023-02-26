@@ -1,4 +1,4 @@
-# need to specify versions to work together
+# need specific versions to work together
 
 werkzeug==2.1.2
 flask == 2.1.2   

@@ -1,4 +1,4 @@
-# setting up class variables in specific environments
+# setting up class variables in specific environment
 
 class BaseConfig:
     TESTING = False

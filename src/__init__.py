@@ -7,7 +7,7 @@ app = Flask(__name__)
 # set api instance
 api = Api(app)
 
-# pull in development environment configs
+# pull in development environment config
 app.config.from_object('src.config.DevelopmentConfig')
 
 
