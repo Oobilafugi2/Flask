@@ -9,3 +9,5 @@ done
 echo "PostgreSQL started"
 
 python manage.py run -h 0.0.0.0
+
+# this is not working, come back to it
