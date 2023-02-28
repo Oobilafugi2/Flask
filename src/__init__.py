@@ -9,12 +9,12 @@ app = Flask(__name__)
 
 api = Api(app)
 
+# instantiate the db
+db = SQLAlchemy(app)  
+
 # set config
 app_settings = os.getenv('APP_SETTINGS')
 app.config.from_object(app_settings)
-
-# instantiate the db
-db = SQLAlchemy(app)  
 
 
 # model
@@ -34,7 +34,7 @@ class Ping(Resource):
     def get(self):
         return {
             'status': 'success',
-            'message': 'pong!'
+            'message': 'pong'
         }
 
 
