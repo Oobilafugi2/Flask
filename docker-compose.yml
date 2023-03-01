@@ -1,25 +1,36 @@
 version: '3.8'
 
+# builds two services: api and api-db
 services:
 
+  # building the api
+  # build from wkdir dockerfile 
+  # initial command is from the entrypoint.sh file
+  # receives on port 5000, exposes on port 5004
+  # environment sets variables like the app initialization and settings, and linking postgres
+  # this runs after api-db is started
   api:
     build:
       context: .
-      dockerfile: Dockerfile
-    volumes:
-      - '.:/usr/src/app'
+      dockerfile: Dockerfile        
+    entrypoint: ['/usr/src/app/entrypoint.sh']  
     ports:
       - 5004:5000
     environment:
+      - COMPOSE_CONVERT_WINDOWS_PATHS=1
       - FLASK_APP=src/__init__.py
       - FLASK_ENV=development
       - APP_SETTINGS=src.config.DevelopmentConfig
-      - DATABASE_URL=postgresql://postgres:postgres@api-db:5432/api_dev  
-      - DATABASE_TEST_URL=postgresql://postgres:postgres@api-db:5432/api_test  
-    depends_on:  
+      - DATABASE_URL=postgresql://postgres:postgres@api-db:5432/api_dev
+      - DATABASE_TEST_URL=postgresql://postgres:postgres@api-db:5432/api_test
+    depends_on:
       - api-db
 
-  api-db:  
+  # building the database
+  # uses dockerfile from db directory
+  # exposes on port 5432(default for postgres)
+  # passes initial user settings
+  api-db:
     build:
       context: ./src/db
       dockerfile: Dockerfile
